@@ -3,7 +3,7 @@ require 'formula'
 class RedbuttonAuthor <Formula
   url 'http://sourceforge.net/projects/redbutton/files/current/redbutton-author-20090727.tar.gz'
   homepage 'http://redbutton.sourceforge.net/'
-  md5 '373ce10d1de8a6b84782818b0b1f54e4'
+  sha1 '16e2c44d0c168403c41c43790ac65249ebd74278'
 
   def patches
     # Original Makefile hardcode the destination path...
