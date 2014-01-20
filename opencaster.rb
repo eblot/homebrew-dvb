@@ -2,9 +2,9 @@ require 'formula'
 
 class Opencaster < Formula
   homepage ''
-  url 'http://ftp.de.debian.org/debian/pool/main/o/opencaster/opencaster_3.2.1+dfsg.orig.tar.gz'
-  sha1 '9b2b2c68573d9479324547725438ded774ff4ccc'
-  version '3.2.1'
+  url 'http://ftp.de.debian.org/debian/pool/main/o/opencaster/opencaster_3.2.2+dfsg.orig.tar.gz'
+  sha1 'fe3ddf8e8a5423dfa4e009ae15ee3d1421afc23e'
+  version '3.2.2'
 
   def patches
     DATA
@@ -17,6 +17,19 @@ class Opencaster < Formula
 end
 
 __END__
+diff --git a/libs/dvbobjects/Makefile b/libs/dvbobjects/Makefile
+index b13cd1d..8b3e332 100755
+--- a/libs/dvbobjects/Makefile
++++ b/libs/dvbobjects/Makefile
+@@ -6,7 +6,7 @@ all:
+ 	./setup.py build
+ 
+ install: all
+-	./setup.py install --root=$(INSTHOME)
++	python ./setup.py install --root=$(INSTHOME)
+ #install: all
+ #	./setup.py install 
+ 
 diff --git a/libs/dvbobjects/setup.py b/libs/dvbobjects/setup.py
 index 28ea451..e30407e 100755
 --- a/libs/dvbobjects/setup.py
@@ -30,6 +43,19 @@ index 28ea451..e30407e 100755
      _ext_modules = [ Extension('dvbobjects.utils._crc32', [ 'sectioncrc.py.c'] ), ]
  
  setup(
+diff --git a/tools/Makefile b/tools/Makefile
+index 4eb385a..668b4ab 100755
+--- a/tools/Makefile
++++ b/tools/Makefile
+@@ -3,7 +3,7 @@ SUBDIRS = oc2sec sec2ts zpipe \
+ 	tspcrmeasure tspidmapper esaudio2pes esaudioinfo \
+ 	esvideompeg2pes esvideompeg2info pes2es pesaudio2ts \
+ 	pesvideo2ts pesinfo tsstamp \
+-	ts2pes mpe2sec tscbrmuxer mpeg2videovbv tstdt i13942ts \
++	ts2pes tscbrmuxer mpeg2videovbv tstdt i13942ts \
+ 	tsvbr2cbr tsfixcc tsudpreceive tsudpsend dsmcc-receive \
+ 	tspcrstamp tstcpreceive tstcpsend tstimeout \
+ 	tstimedwrite tsinputswitch tsdoubleoutput pes2txt \
 diff --git a/tools/dsmcc-receive/dsmcc-receive.c b/tools/dsmcc-receive/dsmcc-receive.c
 index 9141e00..d2b9ecb 100644
 --- a/tools/dsmcc-receive/dsmcc-receive.c
@@ -89,7 +115,7 @@ index 74183a1..055078c 100644
  #include <string.h>
  #include <stdlib.h>
 diff --git a/tools/pesaudio2ts/pesaudio2ts.c b/tools/pesaudio2ts/pesaudio2ts.c
-index 8eb43b5..e6387c1 100644
+index ee5e650..860e978 100644
 --- a/tools/pesaudio2ts/pesaudio2ts.c
 +++ b/tools/pesaudio2ts/pesaudio2ts.c
 @@ -19,10 +19,7 @@
@@ -132,7 +158,7 @@ index 166e8af..1c6fab3 100644
  #include <string.h>
  #include <stdlib.h>
 diff --git a/tools/pesvideo2ts/pesvideo2ts.c b/tools/pesvideo2ts/pesvideo2ts.c
-index 34f96eb..5dd7cf4 100644
+index 1f1bcc9..bcfacfb 100644
 --- a/tools/pesvideo2ts/pesvideo2ts.c
 +++ b/tools/pesvideo2ts/pesvideo2ts.c
 @@ -19,10 +19,7 @@
@@ -161,30 +187,6 @@ index b97fff4..2b83797 100644
  #include <stdio.h>
  #include <string.h>
  #include <stdlib.h>
-diff --git a/tools/tsdoubleoutput/tsdoubleoutput.c b/tools/tsdoubleoutput/tsdoubleoutput.c
-index ff56e13..0f42670 100644
---- a/tools/tsdoubleoutput/tsdoubleoutput.c
-+++ b/tools/tsdoubleoutput/tsdoubleoutput.c
-@@ -33,7 +33,6 @@
- #include <errno.h>
- #include <sys/ioctl.h>
- #include <sys/poll.h>
--#include <linux/fb.h>
- #include <sys/mman.h>
- #include <fcntl.h>
- #include <sys/socket.h>
-diff --git a/tools/tsinputswitch/tsinputswitch.c b/tools/tsinputswitch/tsinputswitch.c
-index 5a97e19..faca6de 100644
---- a/tools/tsinputswitch/tsinputswitch.c
-+++ b/tools/tsinputswitch/tsinputswitch.c
-@@ -33,7 +33,6 @@
- #include <errno.h>
- #include <sys/ioctl.h>
- #include <sys/poll.h>
--#include <linux/fb.h>
- #include <sys/mman.h>
- #include <fcntl.h>
- #include <sys/socket.h>
 diff --git a/tools/tsnullshaper/Makefile b/tools/tsnullshaper/Makefile
 index 2071129..f817062 100644
 --- a/tools/tsnullshaper/Makefile
@@ -201,8 +203,8 @@ diff --git a/tools/tsnullshaper/tsnullshaper.c b/tools/tsnullshaper/tsnullshaper
 index 470c96a..fb9b9cc 100644
 --- a/tools/tsnullshaper/tsnullshaper.c
 +++ b/tools/tsnullshaper/tsnullshaper.c
-@@ -46,6 +46,40 @@ fd_queue* g_fd_time_queue = 0;   /* time based queue */
- fd_queue* g_fd_time_queue_last = 0;  /* add cache time based queue */
+@@ -46,6 +46,40 @@ fd_queue* g_fd_time_queue = 0;		/* time based queue	*/
+ fd_queue* g_fd_time_queue_last = 0;	/* add cache time based queue	*/
  struct timespec g_start_time;
  
 +#ifdef __MACH__
@@ -242,45 +244,9 @@ index 470c96a..fb9b9cc 100644
  /* nsec difference between timespec */
  long long int usecDiff(struct timespec* time_stop, struct timespec* time_start)
  {
-diff --git a/tools/tsororts/tsororts.c b/tools/tsororts/tsororts.c
-index 1471d94..746fef7 100644
---- a/tools/tsororts/tsororts.c
-+++ b/tools/tsororts/tsororts.c
-@@ -33,7 +33,6 @@
- #include <errno.h>
- #include <sys/ioctl.h>
- #include <sys/poll.h>
--#include <linux/fb.h>
- #include <sys/mman.h>
- #include <fcntl.h>
- #include <sys/socket.h>
-diff --git a/tools/tsorts/tsorts.c b/tools/tsorts/tsorts.c
-index 5868c57..716bb73 100644
---- a/tools/tsorts/tsorts.c
-+++ b/tools/tsorts/tsorts.c
-@@ -33,7 +33,6 @@
- #include <errno.h>
- #include <sys/ioctl.h>
- #include <sys/poll.h>
--#include <linux/fb.h>
- #include <sys/mman.h>
- #include <fcntl.h>
- #include <sys/socket.h>
-diff --git a/tools/tsoutputswitch/tsoutputswitch.c b/tools/tsoutputswitch/tsoutputswitch.c
-index 606676d..b261dad 100644
---- a/tools/tsoutputswitch/tsoutputswitch.c
-+++ b/tools/tsoutputswitch/tsoutputswitch.c
-@@ -33,7 +33,6 @@
- #include <errno.h>
- #include <sys/ioctl.h>
- #include <sys/poll.h>
--#include <linux/fb.h>
- #include <sys/mman.h>
- #include <fcntl.h>
- #include <sys/socket.h>
 diff --git a/tools/tsprinter/tsprinter.c b/tools/tsprinter/tsprinter.c
 new file mode 100644
-index 0000000..f4c7db7
+index 0000000..04b64dd
 --- /dev/null
 +++ b/tools/tsprinter/tsprinter.c
 @@ -0,0 +1,143 @@
@@ -483,7 +449,7 @@ index 8660355..07838e4 100644
 +
  long long int usecDiff(struct timespec* time_stop, struct timespec* time_start)
  {
-  long long int temp = 0;
+ 	long long int temp = 0;
 diff --git a/tools/tstimedwrite/Makefile b/tools/tstimedwrite/Makefile
 index 3ad1432..21733ff 100644
 --- a/tools/tstimedwrite/Makefile
@@ -540,19 +506,7 @@ index 3e51cc4..5ad0597 100644
 +
  long long int usecDiff(struct timespec* time_stop, struct timespec* time_start)
  {
-  long long int temp = 0;
-diff --git a/tools/tstimeout/tstimeout.c b/tools/tstimeout/tstimeout.c
-index 17df5ec..de6ea08 100644
---- a/tools/tstimeout/tstimeout.c
-+++ b/tools/tstimeout/tstimeout.c
-@@ -33,7 +33,6 @@
- #include <errno.h>
- #include <sys/ioctl.h>
- #include <sys/poll.h>
--#include <linux/fb.h>
- #include <sys/mman.h>
- #include <fcntl.h>
- #include <sys/socket.h>
+ 	long long int temp = 0;
 diff --git a/tools/tsudpsend/Makefile b/tools/tsudpsend/Makefile
 index 0d55bd4..b398ec4 100644
 --- a/tools/tsudpsend/Makefile
@@ -609,7 +563,7 @@ index 496588d..9cccc94 100644
 +
  long long int usecDiff(struct timespec* time_stop, struct timespec* time_start)
  {
-  long long int temp = 0;
+ 	long long int temp = 0;
 diff --git a/tools/txt2pes/Makefile b/tools/txt2pes/Makefile
 index f506da7..a32543d 100644
 --- a/tools/txt2pes/Makefile
@@ -638,27 +592,3 @@ index fd87109..23afabc 100644
  #include <stdio.h>
  #include <fcntl.h>
  #include <string.h>
-diff -ur opencaster-orig/libs/dvbobjects/Makefile opencaster-3.2.1/libs/dvbobjects/Makefile
---- opencaster-orig/libs/dvbobjects/Makefile	2013-09-12 14:01:50.000000000 +0200
-+++ opencaster-3.2.1/libs/dvbobjects/Makefile	2013-11-06 15:35:03.000000000 +0100
-@@ -6,7 +6,7 @@
- 	./setup.py build
- 
- install: all
--	./setup.py install --root=$(INSTHOME)
-+	python ./setup.py install --root=$(INSTHOME)
- #install: all
- #	./setup.py install 
- 
-diff -ur opencaster-orig/tools/Makefile opencaster-3.2.1/tools/Makefile
---- opencaster-orig/tools/Makefile	2013-09-23 13:59:53.000000000 +0200
-+++ opencaster-3.2.1/tools/Makefile	2013-11-06 15:35:31.000000000 +0100
-@@ -3,7 +3,7 @@
- 	tspcrmeasure tspidmapper esaudio2pes esaudioinfo \
- 	esvideompeg2pes esvideompeg2info pes2es pesaudio2ts \
- 	pesvideo2ts pesinfo tsstamp \
--	ts2pes mpe2sec tscbrmuxer mpeg2videovbv tstdt i13942ts \
-+	ts2pes tscbrmuxer mpeg2videovbv tstdt i13942ts \
- 	tsvbr2cbr tsfixcc tsudpreceive tsudpsend dsmcc-receive \
- 	tspcrstamp tstcpreceive tstcpsend tstimeout \
- 	tstimedwrite tsinputswitch tsdoubleoutput pes2txt \
