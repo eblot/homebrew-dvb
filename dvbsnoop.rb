@@ -1,13 +1,13 @@
 require 'formula'
 
-class LinuxHeader26 < Formula
-  head      'https://github.com/eblot/linuxdvbheaders.git'
-end
-
 class Dvbsnoop < Formula
   homepage ''
   url 'http://downloads.sourceforge.net/project/dvbsnoop/dvbsnoop/dvbsnoop-1.4.50/dvbsnoop-1.4.50.tar.gz'
   sha1 '16dc52337c2431bbcbad78e06abbdb19481da4ec'
+
+  resource "linuxdvbheaders" do
+    url  'https://github.com/eblot/linuxdvbheaders.git'
+  end
 
   def patches
     DATA
@@ -15,9 +15,10 @@ class Dvbsnoop < Formula
 
   def install
     coredir = Dir.pwd
-    LinuxHeader26.new.brew {
+
+    resource("linuxdvbheaders").stage do
         system "ditto", Dir.pwd, coredir+'/src'
-    }
+    end
 
     system "./configure", "--disable-debug",
                           "--disable-dependency-tracking",
