@@ -3,7 +3,7 @@ require 'formula'
 class Dvbsnoop < Formula
   homepage ''
   url 'http://downloads.sourceforge.net/project/dvbsnoop/dvbsnoop/dvbsnoop-1.4.50/dvbsnoop-1.4.50.tar.gz'
-  sha1 '16dc52337c2431bbcbad78e06abbdb19481da4ec'
+  sha256 '7658498b26a5d2a0242e81f0cfafa0e43a2bec56f8674e7ac197dfc310866ec6'
 
   resource "linuxdvbheaders" do
     url  'https://github.com/eblot/linuxdvbheaders.git'

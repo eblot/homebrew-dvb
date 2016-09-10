@@ -3,7 +3,7 @@ require 'formula'
 class Opencaster < Formula
   homepage ''
   url 'http://ftp.de.debian.org/debian/pool/main/o/opencaster/opencaster_3.2.2+dfsg.orig.tar.gz'
-  sha1 'fe3ddf8e8a5423dfa4e009ae15ee3d1421afc23e'
+  sha256 'c9d77f98b31d53f521e3179003a9cb66b0586704717e9d401f3bc0dafa243865'
   version '3.2.2'
 
   def patches

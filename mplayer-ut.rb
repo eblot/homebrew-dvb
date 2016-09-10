@@ -4,19 +4,19 @@ class MplayerUt < Formula
   homepage 'http://www.mplayerhq.hu/'
 
   stable do
-    url "http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.1.1.tar.xz"
-    sha1 "ba2f3bd1442d04b17b0143680850273d928689c1"
+    url 'http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.1.1.tar.xz'
+    sha256 'ce8fc7c3179e6a57eb3a58cb7d1604388756b8a61764cc93e095e7aff3798c76'
 
-    patch :p1 do
-      # Fix compilation on 10.9, adapted from upstream revision r36500
-      url "https://gist.githubusercontent.com/jacknagel/7441175/raw/37657c264a6a3bb4d30dee14538c367f7ffccba9/vo_corevideo.h.patch"
-      sha1 "92717335aed9ec5d01fcf62f9787c6d50cf5d911"
-    end
+    # patch :p1 do
+    #   # Fix compilation on 10.9, adapted from upstream revision r36500
+    #   url 'https://gist.githubusercontent.com/jacknagel/7441175/raw/37657c264a6a3bb4d30dee14538c367f7ffccba9/vo_corevideo.h.patch'
+    #   sha256 "395408a3dc9c3db2b5c200b8722a13a60898c861633b99e6e250186adffd1370"
+    # end
 
     patch :p1 do
       # Add support for UDP timeout
-      url "https://gist.githubusercontent.com/eblot/9068469/raw/121acb2329c219dd3e39b40df60217c33aacd8c7/Add-an-option-to-change-the-UDP-timeout-for-playback.patch"
-      sha1 "8bda3fe6f9212938c3c604b7bd16cd6241419ba3"
+      url 'https://gist.githubusercontent.com/eblot/9068469/raw/121acb2329c219dd3e39b40df60217c33aacd8c7/Add-an-option-to-change-the-UDP-timeout-for-playback.patch'
+      sha256 '0f38eaefcabc2ebf8b893e1a9abc3193297251f6bcb3b5b223d873c7a55b65fc'
     end
   end
 

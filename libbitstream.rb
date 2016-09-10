@@ -4,7 +4,7 @@ class Libbitstream < Formula
   homepage ""
   url "http://download.videolan.org/pub/videolan/bitstream/1.0/bitstream-1.0.tar.bz2"
   head 'git://git.videolan.org/bitstream.git'
-  sha1 "efcee178cf81c51c34b57a9a37c27d641a9a375f"
+  sha256 "3a3837270e6e6715d8f4e4a7b2d4b18e85cf66eb54397c3162e160f1c29a1f13"
 
   def install
     # no build, only install header files
